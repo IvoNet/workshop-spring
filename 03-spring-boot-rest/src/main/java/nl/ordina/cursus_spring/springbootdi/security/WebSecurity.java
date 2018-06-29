@@ -47,5 +47,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .hasRole("USER");
         http.httpBasic();
         http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 }
