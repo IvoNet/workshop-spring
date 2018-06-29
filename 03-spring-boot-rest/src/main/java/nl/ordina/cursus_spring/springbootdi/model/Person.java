@@ -20,6 +20,14 @@ public class Person {
     private String name;
     private int value;
 
+    public Person() {
+    }
+
+    public Person(final String name, final int value) {
+        this.name = name;
+        this.value = value;
+    }
+
     public String getName() {
         return this.name;
     }
