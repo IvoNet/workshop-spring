@@ -30,7 +30,7 @@ public class Game {
          if (this.player1.getValue() > this.player2.getValue()) {
              return String.format("%s has won", player1.getName());
          } else if (this.player1.getValue() < this.player2.getValue()) {
-             return "Player2 has won";
+             return String.format("%s has won", player2.getName());
          } else {
              return "Its a tie!";
          }

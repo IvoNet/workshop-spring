@@ -16,17 +16,9 @@
 
 package nl.ordina.cursus_spring.springbootdi.model;
 
-/**
- * @author Ivo Woltring
- */
 public class Person {
-    private final String name;
+    private String name;
     private int value;
-
-    public Person(final String name, int value) {
-        this.name = name;
-        this.value = value;
-    }
 
     public String getName() {
         return this.name;
@@ -36,4 +28,11 @@ public class Person {
         return this.value;
     }
 
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    public void setValue(final int value) {
+        this.value = value;
+    }
 }

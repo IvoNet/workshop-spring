@@ -22,7 +22,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Service
 @RequestMapping("/rest")
@@ -31,12 +33,32 @@ public class GameService {
     private Person player1;
     private Person player2;
 
-    @GetMapping(value = "/win", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/win")
     public ResponseEntity win() {
         if ((this.player1 == null) || (this.player2 == null)) {
             return ResponseEntity.ok("Game has not started. Please provide players...");
         }
         return ResponseEntity.ok(new Game(this.player1, this.player2).play());
+    }
+
+    @RequestMapping(value = "/player", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @PostMapping(value = "/player", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity player(@RequestBody final Person person) {
+        if (this.player1 == null) {
+            this.player1 = person;
+        } else if (this.player2 == null) {
+            this.player2 = person;
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/reset")
+    public ResponseEntity reset() {
+        this.player1 = null;
+        this.player2 = null;
+        return ResponseEntity.ok("Play again.");
     }
 
 }
